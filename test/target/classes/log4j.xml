@@ -11,8 +11,20 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="test.itwillbs.controller">
-		<level value="info" />
+	<logger name="com.itwillbs.web">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="com.itwillbs.persistence">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="com.itwillbs.service">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="com.itwillbs.controller">
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
@@ -34,7 +46,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="warn" />
+		<priority value="info" />
 		<appender-ref ref="console" />
 	</root>
 	
