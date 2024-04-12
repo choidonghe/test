@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import test.itwillbs.domain.BoardVO;
+
 @Repository
 public class BoardDAOImpl implements BoardDAO{
 
@@ -16,5 +18,23 @@ public class BoardDAOImpl implements BoardDAO{
 	private SqlSession sqlSession;
 	
 	private static final String NAMESPACE="com.itwillbs.mapper.TestMapper";
+
+	@Override
+	public void joinBoard(BoardVO vo) throws Exception {
+		logger.debug("joinBoard(BoardVO vo) 호출");
+		
+		sqlSession.insert(NAMESPACE+".join", vo);
+		
+	}
+
+	@Override
+	public BoardVO loginBoard(BoardVO vo) throws Exception {
+		logger.debug("loginBoard(BoardVO vo) 호출");
+		
+		return sqlSession.selectOne(NAMESPACE+".login", vo);
+	}
+	
+	
+	
 	
 }

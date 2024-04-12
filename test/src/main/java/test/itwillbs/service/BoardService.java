@@ -1,5 +1,10 @@
 package test.itwillbs.service;
 
-public interface BoardService {
+import test.itwillbs.domain.BoardVO;
 
+public interface BoardService {
+	
+	public void boardJoin(BoardVO vo) throws Exception;
+
+	public BoardVO boardLogin(BoardVO vo) throws Exception;
 }

@@ -1,14 +1,23 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
 
-<P>  The time on the server is ${serverTime}. </P>
+	<h1>root.jsp</h1>
+	
+	<div>
+		<div>
+			<a href="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAzMDdfNTIg%2FMDAxNzA5Nzg0MzI5OTMy.mAGsQ6scpRBxmYwbgR-oIv76BRrlHdVQTYnq_EYCWY8g.6CjOH0kGJGue13oDEri0U6ZbvliXmAiU_vUGxeLDHRog.PNG%2F%25B8%25C1%25B0%25ED3.png&type=a340">
+			<img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAzMDdfNTIg%2FMDAxNzA5Nzg0MzI5OTMy.mAGsQ6scpRBxmYwbgR-oIv76BRrlHdVQTYnq_EYCWY8g.6CjOH0kGJGue13oDEri0U6ZbvliXmAiU_vUGxeLDHRog.PNG%2F%25B8%25C1%25B0%25ED3.png&type=a340"><br>
+			</a>
+		</div>
+
+	</div>
+	
+	
 </body>
-</html>
