@@ -13,5 +13,7 @@ public class BoardVO {
 	private String title;
 	private Timestamp regdate;
 	private Timestamp updatedate;
+	private String id;
+	private int pw;
 
 }
