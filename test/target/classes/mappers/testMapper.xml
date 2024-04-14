@@ -7,13 +7,13 @@
 	<mapper namespace="com.itwillbs.mapper.TestMapper">
 	
 	<insert id="join">
-		insert into test_tbl (id,pw,bno)
-		values(#{id},#{pw},#{bno})
+		insert into test_tbl (id,pw,email,name,birthday,gender,phoneNumber)
+		values(#{id},#{pw},#{email},#{name},#{birthday},#{gender},#{phoneNumber})
 	</insert>
 	
 	<select id="login" resultType="test.itwillbs.domain.BoardVO">
 		select * from test_tbl
-		where bno=#{bno}
+		where id=#{id}
 	</select>
 	
 	

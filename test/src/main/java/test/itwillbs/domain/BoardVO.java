@@ -7,13 +7,14 @@ import lombok.Data;
 @Data
 public class BoardVO {
 	
-	private int bno;
-	private String writer;
-	private String content;
-	private String title;
-	private Timestamp regdate;
-	private Timestamp updatedate;
 	private String id;
 	private int pw;
+	private String email;
+	private String name;
+	private String birthday;
+	private String gender;
+	private String phoneNumber;
+	private Timestamp regdate;
+	private Timestamp updatedate;
 
 }
