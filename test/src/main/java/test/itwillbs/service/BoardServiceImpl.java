@@ -30,6 +30,16 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bDao.loginBoard(vo);
 	}
+
+	@Override
+	public int boardIdCheck(String id) throws Exception {
+		logger.debug("boardIdCheck(String id) 호출");
+		logger.debug("Ser id==>"+id);
+		int cnt = bDao.checkIdBoard(id);
+		return cnt;
+		
+	}
+	
 	
 	
 	

@@ -7,4 +7,7 @@ public interface BoardService {
 	public void boardJoin(BoardVO vo) throws Exception;
 
 	public BoardVO boardLogin(BoardVO vo) throws Exception;
+	
+	public int boardIdCheck(String id) throws Exception;
+	
 }

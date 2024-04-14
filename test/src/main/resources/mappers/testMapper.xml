@@ -16,5 +16,12 @@
 		where id=#{id}
 	</select>
 	
+	<select id="checkId" parameterType="String" resultType="int">
+		<![CDATA[
+		SELECT COUNT(id)
+		  FROM test_tbl
+		 where id=#{id}
+		 ]]>
+	</select>
 	
 	</mapper>

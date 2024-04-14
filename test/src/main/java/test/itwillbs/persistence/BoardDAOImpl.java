@@ -33,6 +33,16 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return sqlSession.selectOne(NAMESPACE+".login", vo);
 	}
+
+	@Override
+	public int checkIdBoard(String id) throws Exception {
+	    logger.debug("checkIdBoard(String id) 호출");
+	    logger.debug("DAO id==>"+id);
+
+	    int cnt =  sqlSession.selectOne(NAMESPACE + ".checkId", id);
+	    return cnt;
+	}
+	
 	
 	
 	
