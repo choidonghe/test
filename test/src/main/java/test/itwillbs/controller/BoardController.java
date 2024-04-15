@@ -21,7 +21,7 @@ public class BoardController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 	
-	// http://localhost:8088/join
+	// http://localhost:8088/login
 	
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public void join() throws Exception{
