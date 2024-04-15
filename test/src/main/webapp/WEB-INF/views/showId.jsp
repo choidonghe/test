@@ -10,8 +10,7 @@
 
 	<h1>showId.jsp</h1>
 	
-	${result}
-	${result.id}
+	아이디는 ${result.id} 입니다.
 
 </body>
 </html>

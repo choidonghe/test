@@ -66,9 +66,11 @@ public class BoardController {
 		
 		BoardVO result = bService.boardIdFind(vo);
 		
+		logger.debug("result=====>"+result);
+		
 		model.addAttribute("result", result);
 		
-		return "redirect:/showId";
+		return "showId";
 	}
 	
 	@RequestMapping(value = "/showId",method = RequestMethod.GET)
