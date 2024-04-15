@@ -9,4 +9,6 @@ public interface BoardDAO {
 	public BoardVO loginBoard(BoardVO vo) throws Exception;
 	
 	public int checkIdBoard(String id) throws Exception;
+	
+	public BoardVO findIdBoard(BoardVO vo) throws Exception;
 }

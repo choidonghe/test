@@ -39,6 +39,16 @@ public class BoardServiceImpl implements BoardService{
 		return cnt;
 		
 	}
+
+	@Override
+	public BoardVO boardIdFind(BoardVO vo) throws Exception {
+		logger.debug("boardIdFind(BoardVO vo) 호출");
+		
+		return bDao.findIdBoard(vo);
+		
+	}
+	
+	
 	
 	
 	

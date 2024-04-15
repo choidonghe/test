@@ -10,4 +10,6 @@ public interface BoardService {
 	
 	public int boardIdCheck(String id) throws Exception;
 	
+	public BoardVO boardIdFind(BoardVO vo) throws Exception;
+	
 }

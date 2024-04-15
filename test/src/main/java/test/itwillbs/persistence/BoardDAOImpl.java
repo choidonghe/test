@@ -42,6 +42,16 @@ public class BoardDAOImpl implements BoardDAO{
 	    int cnt =  sqlSession.selectOne(NAMESPACE + ".checkId", id);
 	    return cnt;
 	}
+
+	@Override
+	public BoardVO findIdBoard(BoardVO vo) throws Exception {
+		logger.debug("findIdBoard(BoardVO vo)호출");
+		
+		return sqlSession.selectOne(NAMESPACE+".findId", vo);
+		
+	}
+	
+	
 	
 	
 	

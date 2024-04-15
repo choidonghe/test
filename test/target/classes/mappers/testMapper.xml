@@ -8,7 +8,7 @@
 	
 	<insert id="join">
 		insert into test_tbl (id,pw,email,name,birthday,gender,phoneNumber)
-		values(#{id},#{pw},#{email},#{name},#{birthday},#{gender},#{phoneNumber})
+		values(#{id},#{pw},#{email},#{name},#{birthday},#{gender},#{phoneNumber}) 
 	</insert>
 	
 	<select id="login" resultType="test.itwillbs.domain.BoardVO">
@@ -22,6 +22,11 @@
 		  FROM test_tbl
 		 where id=#{id}
 		 ]]>
+	</select>
+	
+	<select id="findId" resultType="test.itwillbs.domain.BoardVO">
+		select * from test_tbl
+		where id=#{id} AND email=#{email}
 	</select>
 	
 	</mapper>

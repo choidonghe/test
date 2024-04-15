@@ -20,7 +20,8 @@
 			아이디 : <input type="text" name="id"> <br>
 			비밀번호 : <input type="password" name="pw"> <br>
 			
-			<input type="submit" value="로그인"> <br>
+			<input type="submit" value="로그인"> <a href="/findId">아이디 찾기</a> 
+			<br>
 			
 			<a href="/join">회원가입</a>
 			

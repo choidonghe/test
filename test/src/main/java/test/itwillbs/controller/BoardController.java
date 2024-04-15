@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,6 +52,28 @@ public class BoardController {
 		
 		return "redirect:/";
 		
+	}
+	@RequestMapping(value = "/findId",method = RequestMethod.GET)
+	public void findId() throws Exception{
+		logger.debug("findId() 호출");
+	}
+	
+	@RequestMapping(value = "/findId",method = RequestMethod.POST)
+	public String findIdPOST(String id, String email,Model model,BoardVO vo) throws Exception{
+		logger.debug("findIdPOST() 호출");
+		logger.debug("id:"+id);
+		logger.debug("email:"+email);
+		
+		BoardVO result = bService.boardIdFind(vo);
+		
+		model.addAttribute("result", result);
+		
+		return "redirect:/showId";
+	}
+	
+	@RequestMapping(value = "/showId",method = RequestMethod.GET)
+	public void showId() {
+		logger.debug("showId() 호출");
 	}
 	
 }
