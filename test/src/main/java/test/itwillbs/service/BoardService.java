@@ -12,4 +12,8 @@ public interface BoardService {
 	
 	public BoardVO boardIdFind(BoardVO vo) throws Exception;
 	
+	public BoardVO boardPwFind(BoardVO vo) throws Exception;
+	
+	
+	
 }

@@ -11,4 +11,9 @@ public interface BoardDAO {
 	public int checkIdBoard(String id) throws Exception;
 	
 	public BoardVO findIdBoard(BoardVO vo) throws Exception;
+	
+	public BoardVO findPwBoard(BoardVO vo) throws Exception;
+	
+	
+	
 }

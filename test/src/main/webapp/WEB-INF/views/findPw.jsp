@@ -8,15 +8,15 @@
 </head>
 <body>
 
-	<h1>findId.jsp</h1>
+	<h1>findPw.jsp</h1>
 	
 	<fieldset>
-		<legend>아이디 찾기</legend>
+		<legend>비밀번호 찾기</legend>
 		<form action="" method="POST">
-			이름 : <input type="text" name="name"> <br>
+			아이디 : <input type="text" name="id"> <br>
 			이메일 : <input type="text" name="email"> <br>
 			
-			<input type="submit" value="아이디 찾기">
+			<input type="submit" value="비밀번호 찾기">
 		</form>
 	</fieldset>
 	

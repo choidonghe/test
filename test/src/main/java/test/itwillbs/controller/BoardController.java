@@ -1,6 +1,7 @@
 package test.itwillbs.controller;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -45,12 +46,22 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String loginPOST(BoardVO vo)throws Exception{
+	public String loginPOST(String id,String pw,BoardVO vo,HttpSession session)throws Exception{
 		logger.debug("loginPOST() 호출");
+		logger.debug("id:"+id);
+		logger.debug("pw:"+pw);
 		
-		bService.boardLogin(vo);
+		BoardVO result = bService.boardLogin(vo);
+	    
+	    if (result != null) { 
+	        session.setAttribute("result", vo);
+	        logger.debug("result=>"+result);
+	        return "redirect:/";
+	    }else {
+	    	return "login";
+	    }
 		
-		return "redirect:/";
+		
 		
 	}
 	@RequestMapping(value = "/findId",method = RequestMethod.GET)
@@ -59,9 +70,9 @@ public class BoardController {
 	}
 	
 	@RequestMapping(value = "/findId",method = RequestMethod.POST)
-	public String findIdPOST(String id, String email,Model model,BoardVO vo) throws Exception{
+	public String findIdPOST(String name, String email,Model model,BoardVO vo) throws Exception{
 		logger.debug("findIdPOST() 호출");
-		logger.debug("id:"+id);
+		logger.debug("name:"+name);
 		logger.debug("email:"+email);
 		
 		BoardVO result = bService.boardIdFind(vo);
@@ -76,6 +87,25 @@ public class BoardController {
 	@RequestMapping(value = "/showId",method = RequestMethod.GET)
 	public void showId() {
 		logger.debug("showId() 호출");
+	}
+	
+	@RequestMapping(value = "/findPw",method = RequestMethod.GET)
+	public void findPw() throws Exception{
+		logger.debug("findPw() 호출");
+		
+	}
+	
+	@RequestMapping(value = "/findPw",method = RequestMethod.POST)
+	public String findPwPOST(String id, String email,Model model,BoardVO vo) throws Exception{
+		logger.debug("findPwPOST() 호출");
+		logger.debug("id:"+id);
+		logger.debug("email:"+email);
+		
+		BoardVO result = bService.boardPwFind(vo);
+		
+		model.addAttribute("result", result);
+		
+		return "showPw";
 	}
 	
 }

@@ -10,7 +10,7 @@
 
 	<h1>showId.jsp</h1>
 	
-	아이디는 ${result.id} 입니다. <br>
+	비밀번호는 ${result.pw} 입니다. <br>
 	
 	<a href="/login">로그인 하러가기</a>
 	

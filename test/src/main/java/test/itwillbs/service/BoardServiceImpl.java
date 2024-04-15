@@ -47,6 +47,13 @@ public class BoardServiceImpl implements BoardService{
 		return bDao.findIdBoard(vo);
 		
 	}
+
+	@Override
+	public BoardVO boardPwFind(BoardVO vo) throws Exception {
+		logger.debug("boardPwFind(BoardVO vo) 호출");
+		
+		return bDao.findPwBoard(vo);
+	}
 	
 	
 	

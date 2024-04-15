@@ -13,7 +13,7 @@
 	
 	<select id="login" resultType="test.itwillbs.domain.BoardVO">
 		select * from test_tbl
-		where id=#{id}
+		where id=#{id} AND pw=#{pw}
 	</select>
 	
 	<select id="checkId" parameterType="String" resultType="int">
@@ -26,7 +26,16 @@
 	
 	<select id="findId" resultType="test.itwillbs.domain.BoardVO">
 		select * from test_tbl
+		where name=#{name} AND email=#{email}
+	</select>
+	
+	<select id="findPw" resultType="test.itwillbs.domain.BoardVO">
+		select * from test_tbl
 		where id=#{id} AND email=#{email}
 	</select>
+	
+	
+	
+	
 	
 	</mapper>
