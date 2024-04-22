@@ -18,7 +18,7 @@
 
 	<fieldset>
 		<legend>회원가입</legend>
-		<form action="" method="POST">
+		<form action="" method="POST" onsubmit="return checkAll()" id="myForm">
 			<input type="text" name="id" placeholder="아이디" id="id" required="required" > <br>
 				<span class="idchk" style="color: red; display: none;">5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.</span>
 				<span class="id_ok" style="color: green; display: none;">사용 가능한 아이디 입니다.</span>
@@ -48,86 +48,105 @@
 	</fieldset>
 
 <script type="text/javascript">
-	$(document).ready(function() {
-			
-		$('#id').blur(function() {
-			var RegId = /^[a-z0-9_-]{5,20}$/;
-				
-			if(!RegId.test($.trim($("#id").val()))){
-				$('.idchk').css({'color': 'red', 'display': 'block'}); 
-				$('.id_ok').css({"display":"none"});
-      			$('.id_already').css({"display":"none"});
-			}else{
-				$('.idchk').css({'display': 'none'});
-				var id = $('#id').val();
-				
-			    $.ajax({
-		  			url : './ConfirmId',
-		    		data : {
-		       			id : id
-		    		},
-		       		type : 'post',
-		       	
-		     		success : function(cnt) {
-			    		if(cnt != 1 && id.length > 0 ){
-			       			$('.id_ok').css({"display":"block"});
-			  				$('.id_already').css({"display":"none"});
-		    			}else if(cnt == 1 && id.length > 0 ){
-			   				$('.id_already').css({"display":"block"});
-		    				$('.id_ok').css({"display":"none"});
-			 			}else{
-			  				$('.id_ok').css({"display":"none"});
-			 				$('.id_already').css({"display":"none"});
-		    			}
-		   			},
-				}); // ajax 끝
-			}; 	
-			 
-		}); // id 끝
-		
-		$("#pw").blur(function(){
-			var RegPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
-			
-			if(!RegPw.test($.trim($("#pw").val()))){
-				$(".pwchk").css({'color':'red', 'display':'block'});
-			}else{
-				$(".pwchk").css({'display':'none'});
-			}
-		}); //pw 끝 
-		
-		$("#email").blur(function(){
-			var RegEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-			
-			if(!RegEmail.test($.trim($("#email").val()))){
-				$(".emailchk").css({'color':'red','display':'block'});
-			}else{
-				$(".emailchk").css({'display':'none'});
-			}
-		}); //email 끝
-		
-		$("#name").blur(function(){
-			var RegName = /^[ㄱ-힣a-zA-Z]+$/;
-			
-			if(!RegName.test($.trim($("#name").val()))){
-				$('.namechk').css({'color':'red','display':'block'});
-			}else{
-				$('.namechk').css({'display':'none'});
-			}
-		}); //name 끝
-		
-		$("#birthday").blur(function(){
-			var RegBirthday = /^\d{8}$/;
-			
-			if(!RegBirthday.test($.trim($("#birthday").val()))){
-				$(".birthdaychk").css({'display':'block'});
-			}else{
-				$(".birthdaychk").css({'display':'none'});
-			}
-			
-		}); //birthday 끝
-		
-		
-	});
+    $(document).ready(function() {
+        $('#myForm').submit(function(event) {
+            event.preventDefault(); // 폼 제출을 막음
+            validateId();
+        });
+        $('#id').blur(validateId);
+        $('#pw').blur(validatePw);
+        $('#email').blur(validateEmail);
+        $('#name').blur(validateName);
+        $('#birthday').blur(validateBirthday);
+    });
+
+    function validateId() {
+        var RegId = /^[a-z0-9_-]{5,20}$/;
+        var id = $('#id').val();
+
+        if (!RegId.test($.trim(id))) {
+            $('.idchk').css({'display': 'block'}); 
+            $('.id_ok').css({"display":"none"});
+            $('.id_already').css({"display":"none"});
+            return false;
+        } else {
+            $('.idchk').css({'display': 'none'});
+            $.ajax({
+                url: './ConfirmId',
+                data: { id: id },
+                type: 'post',
+                success: function(cnt) {
+                    if (cnt != 1 && id.length > 0) {
+                        $('.id_ok').css({"display":"block"});
+                        $('.id_already').css({"display":"none"});
+                    } else if (cnt == 1 && id.length > 0) {
+                        $('.id_already').css({"display":"block"});
+                        $('.id_ok').css({"display":"none"});
+                    } else {
+                        $('.id_ok').css({"display":"none"});
+                        $('.id_already').css({"display":"none"});
+                    }
+                }
+            });
+        }
+    }
+
+
+    function validatePw() {
+        var RegPw = /^[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+        var pw = $('#pw').val();
+
+        if (!RegPw.test($.trim(pw))) {
+            $(".pwchk").css({'display':'block'});
+            return false;
+        } else {
+            $(".pwchk").css({'display':'none'});
+            return true;
+        }
+    }
+
+    function validateEmail() {
+        var RegEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        var email = $('#email').val();
+
+        if (!RegEmail.test($.trim(email))) {
+            $(".emailchk").css({'display':'block'});
+            return false;
+        } else {
+            $(".emailchk").css({'display':'none'});
+            return true;
+        }
+    }
+
+    function validateName() {
+        var RegName = /^[가-힣a-zA-Z]+$/;
+        var name = $('#name').val();
+
+        if (!RegName.test($.trim(name))) {
+            $('.namechk').css({'display':'block'});
+            return false;
+        } else {
+            $('.namechk').css({'display':'none'});
+            return true;
+        }
+    }
+
+    function validateBirthday() {
+        var RegBirthday = /^\d{8}$/;
+        var birthday = $('#birthday').val();
+
+        if (!RegBirthday.test($.trim(birthday))) {
+            $(".birthdaychk").css({'display':'block'});
+            return false;
+        } else {
+            $(".birthdaychk").css({'display':'none'});
+            return true;
+        }
+    }
+
+    function validateAll() {
+        return validateId() && validatePw() && validateEmail() && validateName() && validateBirthday();
+    }
 </script>
 
 </body>
