@@ -50,7 +50,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#myForm').submit(function(event) {
-            event.preventDefault(); // 폼 제출을 막음
+            event.preventDefault();
             validateId();
         });
         $('#id').blur(validateId);
