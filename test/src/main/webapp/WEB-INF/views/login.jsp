@@ -21,7 +21,7 @@
 			비밀번호 : <input type="password" name="pw"> <br>
 			
 			
-  			<input type="checkbox" id="checkId"><br><a href="/findId">아이디 찾기</a> <a href="/findPw">비밀번호 찾기</a> 
+  			<input type="checkbox" id="checkId">아이디 기억하기<br><a href="/findId">아이디 찾기</a> <a href="/findPw">비밀번호 찾기</a> 
 			<br>
 			
 			<input type="submit" value="로그인"> <a href="/join">회원가입</a>

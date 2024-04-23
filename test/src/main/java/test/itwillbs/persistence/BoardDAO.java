@@ -1,5 +1,7 @@
 package test.itwillbs.persistence;
 
+import java.util.List;
+
 import test.itwillbs.domain.BoardVO;
 
 public interface BoardDAO {
@@ -10,9 +12,9 @@ public interface BoardDAO {
 	
 	public int checkIdBoard(String id) throws Exception;
 	
-	public BoardVO findIdBoard(BoardVO vo) throws Exception;
+	public List<BoardVO> findIdBoard(BoardVO vo) throws Exception;
 	
-	public BoardVO findPwBoard(BoardVO vo) throws Exception;
+	public List<BoardVO> findPwBoard(BoardVO vo) throws Exception;
 	
 	
 	

@@ -50,8 +50,7 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $('#myForm').submit(function(event) {
-            event.preventDefault();
-            validateId();
+            return validateAll(); 
         });
         $('#id').blur(validateId);
         $('#pw').blur(validatePw);
@@ -71,14 +70,19 @@
             return false;
         } else {
             $('.idchk').css({'display': 'none'});
+            
+            // AJAX 요청을 동기적으로 처리
+            var isValidId = false;
             $.ajax({
                 url: './ConfirmId',
                 data: { id: id },
                 type: 'post',
+                async: false, // 동기적으로 설정
                 success: function(cnt) {
                     if (cnt != 1 && id.length > 0) {
                         $('.id_ok').css({"display":"block"});
                         $('.id_already').css({"display":"none"});
+                        isValidId = true;
                     } else if (cnt == 1 && id.length > 0) {
                         $('.id_already').css({"display":"block"});
                         $('.id_ok').css({"display":"none"});
@@ -88,6 +92,8 @@
                     }
                 }
             });
+
+            return isValidId;
         }
     }
 
@@ -143,9 +149,28 @@
             return true;
         }
     }
+    
+    function validateGender(){
+        var gender = document.getElementsByName('gender');
+        flag = false;
+        
+        for(i=0; i<gender.length; i++){
+            if(gender[i].checked){
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    function checkAll() {
+        return validateAll(); 
+    }
 
     function validateAll() {
-        return validateId() && validatePw() && validateEmail() && validateName() && validateBirthday();
+        var isValid = validateId() && validatePw() && validateEmail() && validateName() && validateBirthday() && validateGender();
+
+        return isValid;
     }
 </script>
 

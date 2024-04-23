@@ -1,5 +1,7 @@
 package test.itwillbs.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -41,7 +43,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO boardIdFind(BoardVO vo) throws Exception {
+	public List<BoardVO> boardIdFind(BoardVO vo) throws Exception {
 		logger.debug("boardIdFind(BoardVO vo) 호출");
 		
 		return bDao.findIdBoard(vo);
@@ -49,7 +51,7 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardVO boardPwFind(BoardVO vo) throws Exception {
+	public List<BoardVO> boardPwFind(BoardVO vo) throws Exception {
 		logger.debug("boardPwFind(BoardVO vo) 호출");
 		
 		return bDao.findPwBoard(vo);

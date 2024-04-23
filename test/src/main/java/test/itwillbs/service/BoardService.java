@@ -1,5 +1,7 @@
 package test.itwillbs.service;
 
+import java.util.List;
+
 import test.itwillbs.domain.BoardVO;
 
 public interface BoardService {
@@ -10,9 +12,9 @@ public interface BoardService {
 	
 	public int boardIdCheck(String id) throws Exception;
 	
-	public BoardVO boardIdFind(BoardVO vo) throws Exception;
+	public List<BoardVO> boardIdFind(BoardVO vo) throws Exception;
 	
-	public BoardVO boardPwFind(BoardVO vo) throws Exception;
+	public List<BoardVO> boardPwFind(BoardVO vo) throws Exception;
 	
 	
 	

@@ -1,5 +1,7 @@
 package test.itwillbs.controller;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -75,12 +77,19 @@ public class BoardController {
 		logger.debug("name:"+name);
 		logger.debug("email:"+email);
 		
-		BoardVO result = bService.boardIdFind(vo);
+		List<BoardVO> list = bService.boardIdFind(vo);
 		
-		logger.debug("result=====>"+result);
 		
-		model.addAttribute("result", result);
-		
+		for(BoardVO result : list) {
+			 if (result.getName().equals(name) && result.getEmail().equals(email)) {
+				logger.debug("result=====>"+result);
+				
+				model.addAttribute("result", result);
+				
+				return "showId";
+			}
+			
+		}
 		return "showId";
 	}
 	
@@ -101,7 +110,7 @@ public class BoardController {
 		logger.debug("id:"+id);
 		logger.debug("email:"+email);
 		
-		BoardVO result = bService.boardPwFind(vo);
+		List<BoardVO> result = bService.boardPwFind(vo);
 		
 		model.addAttribute("result", result);
 		
