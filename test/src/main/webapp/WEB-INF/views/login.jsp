@@ -15,7 +15,7 @@
 	
 	<fieldset>
 		<legend>로그인</legend>
-		<form action="" method="POST">
+		<form action="/login" method="POST">
 		
 			아이디 : <input type="text" name="id" id="id"> <br>
 			비밀번호 : <input type="password" name="pw"> <br>
@@ -25,6 +25,8 @@
 			<br>
 			
 			<input type="submit" value="로그인"> <a href="/join">회원가입</a>
+			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			
 		</form>
 	</fieldset>

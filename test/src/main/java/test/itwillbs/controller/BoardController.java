@@ -47,25 +47,22 @@ public class BoardController {
 		logger.debug("login() 호출");
 	}
 	
-	@RequestMapping(value = "/login",method = RequestMethod.POST)
-	public String loginPOST(String id,String pw,BoardVO vo,HttpSession session)throws Exception{
-		logger.debug("loginPOST() 호출");
-		logger.debug("id:"+id);
-		logger.debug("pw:"+pw);
-		
-		BoardVO result = bService.boardLogin(vo);
-	    
-	    if (result != null) { 
-	        session.setAttribute("result", vo);
-	        logger.debug("result=>"+result);
-	        return "redirect:/";
-	    }else {
-	    	return "login";
-	    }
-		
-		
-		
-	}
+	/*
+	 * @RequestMapping(value = "/login",method = RequestMethod.POST) public String
+	 * loginPOST(String id,String pw,BoardVO vo,HttpSession session)throws
+	 * Exception{ logger.debug("loginPOST() 호출"); logger.debug("id:"+id);
+	 * logger.debug("pw:"+pw);
+	 * 
+	 * BoardVO result = bService.boardLogin(vo);
+	 * 
+	 * if (result != null) { session.setAttribute("result", vo);
+	 * logger.debug("result=>"+result); return "redirect:/"; }else { return "login";
+	 * }
+	 * 
+	 * 
+	 * 
+	 * }
+	 */
 	@RequestMapping(value = "/findId",method = RequestMethod.GET)
 	public void findId() throws Exception{
 		logger.debug("findId() 호출");
@@ -117,4 +114,29 @@ public class BoardController {
 		return "showPw";
 	}
 	
+	@RequestMapping(value = "/all",method = RequestMethod.GET)
+	public void doAll() {
+		logger.info(" doAll() 호출");
+	}
+	
+	@RequestMapping(value = "/member",method = RequestMethod.GET)
+	public void doMember() {
+		logger.info(" doMember() 호출");
+	}
+	
+	@RequestMapping(value = "/admin",method = RequestMethod.GET)
+	public void doAdmin() {
+		logger.info(" doAdmin() 호출");
+	}
+	
+	@RequestMapping(value = "accessError",method = RequestMethod.GET)
+	public void accessDenied() throws Exception{
+		logger.debug("accessDenied() 호출");
+		logger.debug("접근 권한없는 접근이 발생");
+	}
+	
+	@RequestMapping(value = "/logout",method = RequestMethod.GET)
+	public void logout() throws Exception{
+		logger.debug("logout() 호출");
+	}
 }
