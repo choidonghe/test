@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+
 <html>
 <head>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -15,7 +19,7 @@
 	
 	<fieldset>
 		<legend>로그인</legend>
-		<form action="" method="POST">
+		<form action="/login" method="POST">
 		
 			아이디 : <input type="text" name="id" id="id"> <br>
 			비밀번호 : <input type="password" name="pw"> <br>
@@ -25,13 +29,24 @@
 			<br>
 			
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
-			<input type="submit" value="로그인"> <a href="/join">회원가입</a>
+			<input type="submit" value="로그인" id="login"> <a href="/join">회원가입</a>
 			
 			<a href="/logout">로그아웃</a>
 			
 			
 		</form>
 	</fieldset>
+	
+	<script type="text/javascript">
+		$("#login").on("click",function(e){
+			
+			e.preventDefault();
+			$("form").submit();
+			
+		})
+		
+	
+	</script>
 
 <!-- 네이버 로그인 버튼 노출 영역 -->
     <div id="naver_id_login"></div>

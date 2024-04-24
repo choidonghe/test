@@ -13,10 +13,20 @@
 	</bean>
 	
 	<!-- 로그인 처리 후 이동객체 -->
-	<bean id="customLoginSuccess" 
+	<!-- <bean id="customLoginSuccess" 
 		  class="test.itwillbs.security.CustomLoginSuccessHandler">
-	</bean>
+	</bean> -->
 	
+	<!-- 암호화 처리 객체(임시, 실제 암호화X) -->
+	<!-- <bean id="CustomNoopPasswordEncoder"
+		  class="test.itwillbs.security.CustomNoopPasswordEncoder">
+	</bean> -->
+	
+	<!-- 암호화 처리 객체(실제 암호화) -->
+	<bean id="bcryptPasswordEncoder"
+		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	
+	</bean>
 
 	<security:http>
 		
@@ -27,14 +37,34 @@
 		<security:access-denied-handler ref="customAccessDenied"/>
 		
 		<security:intercept-url pattern="/all" access="permitAll"/>
-		<security:intercept-url pattern="/member" access="hasRole('ROLE_MEMBER')"/>
+		<security:intercept-url pattern="/member" access="hasRole('ROLE_MANAGER')"/>
 		<security:intercept-url pattern="/admin" access="hasRole('ROLE_ADMIN')"/>
 		
-		<security:form-login/>
+		<security:intercept-url pattern="/login" access="permitAll"/>
+		<security:intercept-url pattern="/join" access="permitAll"/>
+		<security:intercept-url pattern="/home" access="permitAll"/>
+		<security:intercept-url pattern="/" access="permitAll"/>
 		
-		<security:form-login login-page="/login" 
-		authentication-success-handler-ref="CustomLoginSuccessHandler"/>
 		
+		<!-- 로그인 -->
+		<security:form-login 
+		login-page="/login"
+		username-parameter="id"
+		password-parameter="pw"
+		default-target-url="/"/>
+
+		<!-- 
+		username-parameter : input 태그의 아이디 혹은 이메일 name 속성 값 (default: username)
+		password-parameter : input 태그의 비밀번호 name 속성 값 (default: password)
+		login-page : 새로운 로그인 화면 url (default: 스프링 기본 로그인 화면)
+		login-processing-url : form 태그의 action 속성 (default: POST /login)
+		default-target-url : 로그인 성공시 호출할 url
+		authentication-failure-url : 로그인 실패시 호출할 url (default: /login?error=1)
+		authentication-success-handler-ref : 로그인 성공시 default-target-url이 아닌 핸들러로 리다이렉트
+		authentication-failure-handler-ref : 로그인 실패시 authentication-failure-url이 아닌 핸들러로 리다이렉트
+		always-use-default-target : 무조건 핸들러가 지정한 페이지로 이동 (default: false)
+		-->
+	
 		<!-- 로그아웃 -->
 		<security:logout logout-url="/logout" invalidate-session="true"/>
 		
@@ -45,13 +75,21 @@
 		<!-- 시큐리티 관련 처리(경비팀 소속경비원) -->
 		<security:authentication-provider>
 		<!-- 사용자 인증정보 관리(+JDBC) -->
-		<security:jdbc-user-service data-source-ref="dataSource"/>
+		<security:jdbc-user-service data-source-ref="dataSource"
+									users-by-username-query="select id,pw,enabled from test_tbl where id=?"
+									authorities-by-username-query="select id,AUTHORITY from auth where id=?"/>
+									
+		<!-- <security:password-encoder ref="CustomNoopPasswordEncoder"/> -->
+		<security:password-encoder ref="bcryptPasswordEncoder"/>
+		
+		
+		
 			<!-- 사용자 인증정보 관리 -->
-			<security:user-service>
-				<!--사용자 정보 등록(방문록 작성)-->
+			<!-- <security:user-service>
+				사용자 정보 등록(방문록 작성)
 				<security:user name="asdqwe" password="{noop}asdqwe123" authorities="ROLE_MEMBER"/>
 				<security:user name="asdqweas" password="{noop}asdqwe123" authorities="ROLE_MEMBER,ROLE_ADMIN"/>
-			</security:user-service>
+			</security:user-service> -->
 		</security:authentication-provider>
 	
 	</security:authentication-manager>

@@ -40,6 +40,7 @@
 			<input type="radio" name="gender" value="여" >여 <br>
 			<input type="text" name="phoneNumber" placeholder="휴대폰"> <br>
 			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<input type="submit" value="회원가입">
 			
 			<a href="/login">로그인</a>

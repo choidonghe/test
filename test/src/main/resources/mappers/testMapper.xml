@@ -5,6 +5,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 	<mapper namespace="com.itwillbs.mapper.TestMapper">
+
+	<resultMap type="test.itwillbs.domain.BoardVO" id="boardMap">
+		<id property="id" column="id"/>
+		<result property="id" column="id"/>
+		<result property="pw" column="pw"/>
+		<result property="email" column="email"/>
+		<result property="name" column="name"/>
+		<result property="birthday" column="birthday"/>
+		<result property="gender" column="gender"/>
+		<result property="phoneNumber" column="phoneNumber"/>
+		<result property="regdate" column="regdate"/>
+		<result property="updatedate" column="updatedate"/>
+		
+		<collection property="authList" resultMap="authMap"></collection>
+		
+	</resultMap>
+	
+	<resultMap type="test.itwillbs.domain.AuthVO" id="authMap">
+		
+		<result property="id" column="id"/>
+		<result property="AUTHORITY" column="AUTHORITY"/>
+		
+	</resultMap>
 	
 	<insert id="join">
 		insert into test_tbl (id,pw,email,name,birthday,gender,phoneNumber)
@@ -34,6 +57,7 @@
 		where id=#{id} AND email=#{email}
 	</select>
 	
+
 	
 	
 	
