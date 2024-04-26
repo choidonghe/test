@@ -132,7 +132,12 @@ public class SecurityTest {
 		
 		}//for
 	}
-	
+	//@Test
+	public void testEncode() {
+		System.out.println(pwEncoder.encode("1234"));
+		System.out.println(pwEncoder.encode("1234"));
+		
+	}
 	/*
 	 * @Test public void test_회원정보조회() throws Exception{
 	 * logger.info("test_회원정보조회() 실행");
@@ -143,6 +148,17 @@ public class SecurityTest {
 	 * 
 	 * logger.info(" vo :"+ vo); }
 	 */
+	
+	@Test
+	public void test_회원정보조회() throws Exception{
+		logger.info("test_회원정보조회() 실행");
+		
+		
+		
+		BoardVO vo = bdao.read("ADMIN99");
+		
+		logger.info(" vo :"+ vo);
+	}
 }
 
 

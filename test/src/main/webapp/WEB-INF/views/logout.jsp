@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -14,8 +17,17 @@
 		
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		
-		<input type="submit" value="로그아웃">
+		<input type="button" value="로그아웃" id="button">
+		
 	</form>
+	
+	<script type="text/javascript">
+		$("#button").on("click",function(e){
+			e.preventDefault();
+			$("form").submit();
+		})
+	
+	</script>
 
 </body>
 </html>

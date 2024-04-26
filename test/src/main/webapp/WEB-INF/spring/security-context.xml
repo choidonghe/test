@@ -25,9 +25,9 @@
 	<!-- 암호화 처리 객체(실제 암호화) -->
 	<bean id="bcryptPasswordEncoder"
 		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-	
 	</bean>
-
+	
+	
 	<security:http>
 		
 		<!--  접근 권한이 없을 때 보여지는 뷰 페이지 설정 -->
@@ -49,8 +49,6 @@
 		<!-- 로그인 -->
 		<security:form-login 
 		login-page="/login"
-		username-parameter="id"
-		password-parameter="pw"
 		default-target-url="/"/>
 
 		<!-- 
@@ -64,9 +62,13 @@
 		authentication-failure-handler-ref : 로그인 실패시 authentication-failure-url이 아닌 핸들러로 리다이렉트
 		always-use-default-target : 무조건 핸들러가 지정한 페이지로 이동 (default: false)
 		-->
-	
+		
+		<security:remember-me remember-me-cookie="remember-me" token-validity-seconds="604800"/>
+		
 		<!-- 로그아웃 -->
-		<security:logout logout-url="/logout" invalidate-session="true"/>
+		<security:logout logout-url="/logout" invalidate-session="true" />
+		
+		
 		
 	</security:http>
 	
@@ -77,10 +79,11 @@
 		<!-- 사용자 인증정보 관리(+JDBC) -->
 		<security:jdbc-user-service data-source-ref="dataSource"
 									users-by-username-query="select id,pw,enabled from test_tbl where id=?"
-									authorities-by-username-query="select id,AUTHORITY from auth where id=?"/>
-									
+									authorities-by-username-query="select id,AUTHORITY from auth where id=?" />
+
 		<!-- <security:password-encoder ref="CustomNoopPasswordEncoder"/> -->
 		<security:password-encoder ref="bcryptPasswordEncoder"/>
+		
 		
 		
 		

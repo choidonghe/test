@@ -34,6 +34,10 @@
 		values(#{id},#{pw},#{email},#{name},#{birthday},#{gender},#{phoneNumber}) 
 	</insert>
 	
+	<insert id="authJoin">
+		insert into auth (id) values(#{id})
+	</insert>
+	
 	<select id="login" resultType="test.itwillbs.domain.BoardVO">
 		select * from test_tbl
 		where id=#{id} AND pw=#{pw}
@@ -55,6 +59,13 @@
 	<select id="findPw" resultType="test.itwillbs.domain.BoardVO">
 		select * from test_tbl
 		where id=#{id} AND email=#{email}
+	</select>
+	
+	<select id="list" resultMap="boardMap">
+			select test.id, pw, name,birthday,gender,phoneNumber,email, enabled,AUTHORITY,regdate
+			from test_tbl test LEFT OUTER JOIN auth
+			on test.id = auth.id
+			where test.id = #{id}
 	</select>
 	
 

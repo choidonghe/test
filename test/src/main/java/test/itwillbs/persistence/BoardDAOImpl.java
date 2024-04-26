@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import test.itwillbs.domain.AuthVO;
 import test.itwillbs.domain.BoardVO;
 
 @Repository
@@ -26,6 +27,14 @@ public class BoardDAOImpl implements BoardDAO{
 		logger.debug("joinBoard(BoardVO vo) 호출");
 		
 		sqlSession.insert(NAMESPACE+".join", vo);
+		
+	}
+	
+	@Override
+	public void authJoin(AuthVO avo) throws Exception {
+		logger.debug("authJoin(AuthVO vo) 호출");
+		
+		sqlSession.insert(NAMESPACE+".authJoin", avo);
 		
 	}
 
@@ -59,7 +68,12 @@ public class BoardDAOImpl implements BoardDAO{
 		
 		return sqlSession.selectOne(NAMESPACE+".findPw", vo);
 	}
-	
+
+	@Override
+	public BoardVO read(String id) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE+".list", id);
+	}
 	
 	
 	

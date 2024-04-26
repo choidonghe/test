@@ -1,5 +1,6 @@
 package test.itwillbs.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,9 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import test.itwillbs.domain.AuthVO;
 import test.itwillbs.domain.BoardVO;
 import test.itwillbs.persistence.BoardDAO;
 import test.itwillbs.service.BoardService;
@@ -30,6 +35,9 @@ public class BoardController {
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
 	// http://localhost:8088/login
+	
+	@Autowired
+	private PasswordEncoder pwEncoder;
 
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public void join() throws Exception {
@@ -38,10 +46,19 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String joinPOST(BoardVO vo) throws Exception {
+	public String joinPOST(BoardVO vo,AuthVO avo, String pw,String id) throws Exception{
 		logger.debug("joinPOST()");
+		logger.debug("id==>"+id);
+		logger.debug("pw"+pw);
+		logger.debug("vo==>"+vo);
+		
+		vo.setPw(pwEncoder.encode(vo.getPw()));
 
+		
 		bService.boardJoin(vo);
+		bService.boardAuthJoin(avo);
+		
+		
 
 		return "redirect:/login";
 	}
@@ -52,26 +69,43 @@ public class BoardController {
 	}
 
 	
-	@RequestMapping(value = "/login",method = RequestMethod.POST) 
-	public String loginPOST(String id,String pw,BoardVO vo,HttpSession session)throws Exception {
-		logger.debug("loginPOST() 호출");
-		logger.debug("id:"+id);
-		logger.debug("pw:"+pw);
-	  
-		BoardVO result = bService.boardLogin(vo);
-	  
-		if (result != null) {
-			logger.debug("result=>"+result);
-			session.setAttribute("result", result);
-			return "redirect:/";
-			}else {
-				return "login";
-			}
-	}
+	/*
+	 * @RequestMapping(value = "/login",method = RequestMethod.POST) public String
+	 * loginPOST(String id,String pw,BoardVO vo,HttpSession session)throws Exception
+	 * { logger.debug("loginPOST() 호출"); logger.debug("id:"+id);
+	 * logger.debug("pw:"+pw);
+	 * 
+	 * BoardVO result = bService.boardLogin(vo);
+	 * 
+	 * if (result != null) { logger.debug("result=>"+result);
+	 * session.setAttribute("result", result); return "redirect:/"; }else { return
+	 * "login"; } }
+	 */
 	
 	@RequestMapping(value = "/",method = RequestMethod.GET)
-	public void main() {
+	public String main(Model model,String id,Principal principal) throws Exception {
 		logger.debug("main() 호출");
+		
+		/*
+		 * // 현재 사용자의 인증 정보 가져오기 Authentication authentication =
+		 * SecurityContextHolder.getContext().getAuthentication();
+		 * 
+		 * // 사용자 이름 가져오기 String username = authentication.getName();
+		 * 
+		 * BoardVO result = bService.read(id);
+		 * 
+		 * // 모델에 사용자 이름 추가하기 model.addAttribute("username", username);
+		 * model.addAttribute("result", result);
+		 */
+		
+		String userid = principal.getName();
+        BoardVO vo = bService.read(userid);
+        model.addAttribute("user", vo);
+		
+		
+        // home.jsp로 이동
+        return "home";
+		
 	}
 	 
 	@RequestMapping(value = "/findId", method = RequestMethod.GET)

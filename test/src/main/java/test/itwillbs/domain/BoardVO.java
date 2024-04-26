@@ -1,6 +1,7 @@
 package test.itwillbs.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -16,5 +17,7 @@ public class BoardVO {
 	private String phoneNumber;
 	private Timestamp regdate;
 	private Timestamp updatedate;
-
+	
+	private List<AuthVO> authList;
+	
 }

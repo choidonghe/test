@@ -22,6 +22,8 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		logger.debug(" CustomAccessDeniedHandler_handle() 실행 ");
 		logger.debug(" 접근 권한이 없음! ");
 		
+		logger.debug(accessDeniedException+"");
+		
 		response.sendRedirect("/accessError");
 		
 	} 
