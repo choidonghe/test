@@ -63,10 +63,20 @@ public class BoardDAOImpl implements BoardDAO{
 	}
 
 	@Override
-	public List<BoardVO> findPwBoard(BoardVO vo) throws Exception {
+	public BoardVO findPwBoard(BoardVO vo) throws Exception {
 		logger.debug("findPwBoard(BoardVO vo) 호출");
 		
 		return sqlSession.selectOne(NAMESPACE+".findPw", vo);
+	}
+	
+	
+
+	@Override
+	public void pwUpdate(BoardVO vo) throws Exception {
+		logger.debug("pwUpdate(BoardVO vo) 호출");
+		
+		sqlSession.update(NAMESPACE+".newPw", vo);
+		
 	}
 
 	@Override

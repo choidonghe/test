@@ -64,10 +64,20 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public List<BoardVO> boardPwFind(BoardVO vo) throws Exception {
+	public BoardVO boardPwFind(BoardVO vo) throws Exception {
 		logger.debug("boardPwFind(BoardVO vo) 호출");
 		
 		return bDao.findPwBoard(vo);
+	}
+	
+	
+
+	@Override
+	public void updatePw(BoardVO vo) throws Exception {
+		logger.debug("updatePw(BoardVO vo) 호출");
+		
+		bDao.pwUpdate(vo);
+		
 	}
 
 	@Override

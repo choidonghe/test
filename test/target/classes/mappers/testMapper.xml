@@ -61,6 +61,11 @@
 		where id=#{id} AND email=#{email}
 	</select>
 	
+	<update id="newPw">
+		 UPDATE test_tbl SET pw = #{pw}
+    	WHERE id = #{id} AND email = #{email}
+	</update>
+	
 	<select id="list" resultMap="boardMap">
 			select test.id, pw, name,birthday,gender,phoneNumber,email, enabled,AUTHORITY,regdate
 			from test_tbl test LEFT OUTER JOIN auth

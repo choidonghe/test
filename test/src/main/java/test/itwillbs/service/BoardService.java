@@ -17,7 +17,9 @@ public interface BoardService {
 	
 	public List<BoardVO> boardIdFind(BoardVO vo) throws Exception;
 	
-	public List<BoardVO> boardPwFind(BoardVO vo) throws Exception;
+	public BoardVO boardPwFind(BoardVO vo) throws Exception;
+	
+	public void updatePw(BoardVO vo) throws Exception;
 	
 	public BoardVO read(String id) throws Exception;
 	

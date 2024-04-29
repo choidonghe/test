@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -23,14 +24,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import test.itwillbs.domain.AuthVO;
 import test.itwillbs.domain.BoardVO;
+import test.itwillbs.domain.PasswordGenerator;
 import test.itwillbs.persistence.BoardDAO;
 import test.itwillbs.service.BoardService;
+import test.itwillbs.service.MailService;
 
 @Controller
+@EnableAsync
 public class BoardController {
 
 	@Inject
 	private BoardService bService;
+	
+	@Inject
+	private MailService mailService;
 
 	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
 
@@ -151,11 +158,39 @@ public class BoardController {
 		logger.debug("id:" + id);
 		logger.debug("email:" + email);
 
-		List<BoardVO> result = bService.boardPwFind(vo);
+		
+		  BoardVO result = bService.boardPwFind(vo);		  
+		  model.addAttribute("result", result);
+		 
+		
+		 // 사용자가 존재하는 경우에만 처리
+	    if (result != null) {
+	        // 임시 비밀번호 생성
+	        String temporaryPassword = PasswordGenerator.generateRandomPassword();
+	        // 암호화된 임시 비밀번호 생성
+	        String pw = pwEncoder.encode(temporaryPassword);
+	        // 사용자의 비밀번호를 암호화된 임시 비밀번호로 변경
+	        result.setPw(pw);
+	        // 변경된 비밀번호를 데이터베이스에 업데이트
+	        bService.updatePw(result);
+	        
+	        // 이메일로 임시 비밀번호 보내기
+	        StringBuffer sb = new StringBuffer();
+	        sb.append(" <html><head></head><body> ");
+	        sb.append(" <h1> 안녕하세요 *** 입니다. </h1> ");
+	        sb.append(" <p>임시 비밀번호: " + temporaryPassword + "</p> ");
+	        sb.append(" </body></html> ");
+	        
+	        mailService.sendMail(email, "임시 비밀번호 발급 안내", sb.toString());
+	        
+	        // 비밀번호 변경 후 메시지를 모델에 추가
+	        model.addAttribute("message", "임시 비밀번호가 이메일로 발송되었습니다. 새로운 비밀번호로 로그인해주세요.");
+	    } else {
+	        // 사용자가 존재하지 않는 경우에는 메시지를 모델에 추가
+	        model.addAttribute("message", "입력한 정보와 일치하는 사용자가 없습니다.");
+	    }
 
-		model.addAttribute("result", result);
-
-		return "showPw";
+	    return "showPw";
 	}
 
 	@RequestMapping(value = "/all", method = RequestMethod.GET)

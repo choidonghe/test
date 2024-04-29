@@ -17,8 +17,8 @@
 		<legend>로그인</legend>
 		<form action="" method="POST">
 		
-			아이디 : <input type="text" name="username" id="id"> <br>
-			비밀번호 : <input type="password" name="password"> <br>
+			아이디 : <input type="text" name="id" id="id"> <br>
+			비밀번호 : <input type="password" name="pw"> <br>
 			
 			
   			<input type="checkbox" name="remember-me">아이디 기억하기<br><a href="/findId">아이디 찾기</a> <a href="/findPw">비밀번호 찾기</a> 

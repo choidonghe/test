@@ -17,7 +17,9 @@ public interface BoardDAO {
 	
 	public List<BoardVO> findIdBoard(BoardVO vo) throws Exception;
 	
-	public List<BoardVO> findPwBoard(BoardVO vo) throws Exception;
+	public BoardVO findPwBoard(BoardVO vo) throws Exception;
+	
+	public void pwUpdate(BoardVO vo) throws Exception;
 	
 	public BoardVO read(String id) throws Exception;
 	
