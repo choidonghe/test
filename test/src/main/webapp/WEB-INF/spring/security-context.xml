@@ -44,6 +44,7 @@
 		<security:intercept-url pattern="/join" access="permitAll"/>
 		<security:intercept-url pattern="/home" access="permitAll"/>
 		<security:intercept-url pattern="/" access="permitAll"/>
+
 		
 		
 		<!-- 로그인 -->

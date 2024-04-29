@@ -19,6 +19,7 @@
 			이름 : <input type="text" name="name" > <br>
 			이메일 : <input type="text" name="email"> <br>
 			
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 			<input type="submit" value="아이디 찾기">
 		</form>
 	</fieldset>
