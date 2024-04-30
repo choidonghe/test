@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import test.itwillbs.domain.AuthVO;
 import test.itwillbs.domain.BoardVO;
@@ -70,9 +71,13 @@ public class BoardController {
 		return "redirect:/login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public void login() {
-		logger.debug("login() 호출");
+	@GetMapping("/login")
+	public String loginForm(@RequestParam(value = "error", required = false) String error, 
+				@RequestParam(value = "exception", required = false) String exception,
+				Model model) {
+		model.addAttribute("error", error);
+		model.addAttribute("exception", exception);
+		return "/login";
 	}
 
 	

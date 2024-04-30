@@ -27,6 +27,9 @@
 		  class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
 	</bean>
 	
+	<bean id="userLoginFailHandler"
+		  class="test.itwillbs.security.UserLoginFailHandler">
+	</bean>
 	
 	<security:http>
 		
@@ -52,7 +55,8 @@
 		login-page="/login"
 		username-parameter="id"
 		password-parameter="pw"
-		default-target-url="/"/>
+		default-target-url="/"
+		authentication-failure-handler-ref = "userLoginFailHandler"/>
 
 		<!-- 
 		username-parameter : input 태그의 아이디 혹은 이메일 name 속성 값 (default: username)

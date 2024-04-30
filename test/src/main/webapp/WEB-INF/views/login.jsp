@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <html>
 <head>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -30,6 +33,11 @@
 			
 		</form>
 	</fieldset>
+	<span> 
+    <c:if test="${error}">
+        <p id="valid" class="alert alert-danger">${exception}</p>
+    </c:if>
+</span>
 
 <!-- 네이버 로그인 버튼 노출 영역 -->
     <div id="naver_id_login"></div>
