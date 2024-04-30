@@ -11,8 +11,16 @@
 	</appender>
 	
 	<!-- Application Loggers -->
+	<logger name="test.itwillbs.persistence">
+		<level value="debug" />
+	</logger>
+	
+	<logger name="test.itwillbs.service">
+		<level value="debug" />
+	</logger>
+	
 	<logger name="test.itwillbs.controller">
-		<level value="info" />
+		<level value="debug" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
