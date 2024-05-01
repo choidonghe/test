@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="include/header.jsp" %>
     
 
 <!DOCTYPE html>
@@ -20,6 +21,10 @@
 	<a href="/logout">로그아웃</a>
 	</div>
 	
+	<a href="http://localhost:8088/mypage">마이페이지</a>
 	
+	
+	
+	<%@include file="include/footer.jsp" %>
 </body>
 </html>

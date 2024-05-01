@@ -3,6 +3,8 @@
     
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
     
+    <%@include file="include/header.jsp" %>
+    
 <html>
 <head>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -129,6 +131,8 @@
 		return unescape(cookieValue);
 	}
 </script> -->
+
+<%@include file="include/footer.jsp" %>
 
 </body>
 </html>
