@@ -248,4 +248,14 @@ public class BoardController {
 		
 	}
 	
+	@RequestMapping(value = "/modify",method = RequestMethod.GET)
+	public void modify(Principal principal,Model model) throws Exception{
+		logger.debug("modify() 호출");
+		
+		String userid = principal.getName();
+        BoardVO vo = bService.read(userid);
+        model.addAttribute("user", vo);
+		
+	}
+	
 }

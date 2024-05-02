@@ -19,5 +19,6 @@ public class BoardVO {
 	private Timestamp updatedate;
 	
 	private List<AuthVO> authList;
+	private List<GradeVO> gradeList;
 	
 }

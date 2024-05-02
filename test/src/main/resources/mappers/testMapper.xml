@@ -19,6 +19,7 @@
 		<result property="updatedate" column="updatedate"/>
 		
 		<collection property="authList" resultMap="authMap"></collection>
+		<collection property="gradeList" resultMap="gradeMap"></collection>
 		
 	</resultMap>
 	
@@ -27,6 +28,13 @@
 		<result property="id" column="id"/>
 		<result property="AUTHORITY" column="AUTHORITY"/>
 		
+	</resultMap>
+	
+	<resultMap type="test.itwillbs.domain.GradeVO" id="gradeMap">
+		
+		<result property="grade" column="grade"/>
+		<result property="grade_commission" column="grade_commission"/>
+	
 	</resultMap>
 	
 	<insert id="join">
@@ -44,11 +52,11 @@
 	</select>
 	
 	<select id="checkId" parameterType="String" resultType="int">
-		<![CDATA[
+	
 		SELECT COUNT(id)
 		  FROM test_tbl
 		 where id=#{id}
-		 ]]>
+	
 	</select>
 	
 	<select id="findId" resultType="test.itwillbs.domain.BoardVO">
@@ -67,10 +75,11 @@
 	</update>
 	
 	<select id="list" resultMap="boardMap">
-			select test.id, pw, name,birthday,gender,phoneNumber,email, enabled,AUTHORITY,regdate
-			from test_tbl test LEFT OUTER JOIN auth
-			on test.id = auth.id
-			where test.id = #{id}
+			SELECT test.id, pw, name, birthday, gender, phoneNumber, email, enabled, AUTHORITY, regdate, mem.grade, mem.grade_commission
+FROM test_tbl test
+LEFT OUTER JOIN auth ON test.id = auth.id
+LEFT OUTER JOIN membership mem ON test.grade = mem.grade
+WHERE test.id = #{id};
 	</select>
 	
 
